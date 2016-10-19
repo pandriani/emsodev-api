@@ -55,7 +55,7 @@ import eu.emsodev.observations.model.Parameters;
 		WebMvcAutoConfiguration.class })
 public class ObservationsController implements ObservationsApi {
 
-		
+	//Test	
 	@Value("${emsodev.global.setting.urlToCall.observatoriesGet}")
 	private String urlToCallObservatoriesGet;
 	
