@@ -18,7 +18,7 @@ public class SwaggerDocumentationConfig {
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("European Multidisciplinary Seafloor and water‐column Observatory DEVelopment Data Management Platform API (EMSODEV DMP API)")
-            .description("**RESTful interfaces which allow an external user (i.e scientific communities) to search data related to EGIM observatories, EGIM instruments and EGIM parameters in a certain data range.** > Find source code of this API [here](https://github.com/) ")
+            .description("**RESTful interfaces which allow an external user (i.e scientific communities) to search data related to EGIM observatories, EGIM instruments and EGIM parameters in a certain data range.** > Find source code of this API [here](https://github.com/EMSODEV/emsodev-api/) ")
             .license("Apache 2.0")
             .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
             .termsOfServiceUrl("http://www.emsodev.eu")
