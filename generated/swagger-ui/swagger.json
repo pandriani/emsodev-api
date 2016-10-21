@@ -1,0 +1,388 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a sample.",
+    "version" : "v1",
+    "title" : "Swagger Maven Plugin Sample",
+    "termsOfService" : "http://www.github.com/kongchen/swagger-maven-plugin",
+    "contact" : {
+      "name" : "Kong Chen",
+      "url" : "http://kongch.com",
+      "email" : "kongchen@gmail.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "www.example.com:8080",
+  "basePath" : "/api",
+  "tags" : [ {
+    "name" : "instrument"
+  }, {
+    "name" : "observatories",
+    "description" : "the observatories API"
+  }, {
+    "name" : "observatory"
+  }, {
+    "name" : "parameter"
+  } ],
+  "schemes" : [ null ],
+  "paths" : {
+    "/observatories" : {
+      "get" : {
+        "tags" : [ "observatory" ],
+        "summary" : "It represents the EGIM observatories accessible through the EMSODEV Data Management Platform API.",
+        "description" : "Get a list of `EGIM observartories`.",
+        "operationId" : "observatoriesGet",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "EGIM observatories list.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Observatory"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/observatories/{observatory}" : {
+      "get" : {
+        "tags" : [ "observatory" ],
+        "summary" : "The specified EGIM observatory.",
+        "description" : "Get `EGIM observatory` resource.",
+        "operationId" : "observatoriesObservatoryGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "observatory",
+          "in" : "path",
+          "description" : "EGIM observatory name",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Details of an EGIM observatory.",
+            "schema" : {
+              "$ref" : "#/definitions/Observatory"
+            }
+          }
+        }
+      }
+    },
+    "/observatories/{observatory}/instruments" : {
+      "get" : {
+        "tags" : [ "instrument" ],
+        "summary" : "It represents the instruments deployed in an EGIM observatory.",
+        "description" : "Get a list of `instruments` for an `EGIM observatory`.",
+        "operationId" : "observatoriesObservatoryInstrumentsGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "observatory",
+          "in" : "path",
+          "description" : "EGIM observatory name",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "List of instruments for an EGIM observatory",
+            "schema" : {
+              "$ref" : "#/definitions/Instruments"
+            }
+          }
+        }
+      }
+    },
+    "/observatories/{observatory}/instruments/{instrument}" : {
+      "get" : {
+        "tags" : [ "instrument" ],
+        "summary" : "An EGIM observatory instrument",
+        "description" : "Get `EGIM observatory instrument` resource.",
+        "operationId" : "observatoriesObservatoryInstrumentsInstrumentGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "observatory",
+          "in" : "path",
+          "description" : "EGIM observatory name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "instrument",
+          "in" : "path",
+          "description" : "EGIM observatory instrument name.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Details of an EGIM observatory instrument",
+            "schema" : {
+              "$ref" : "#/definitions/Instrument"
+            }
+          }
+        }
+      }
+    },
+    "/observatories/{observatory}/instruments/{instrument}/parameters" : {
+      "get" : {
+        "tags" : [ "parameter" ],
+        "summary" : "It represents the parametres observed by an instrument.",
+        "description" : "Gets the list of `EGIM parameters` for a specific `EGIM instrument` of an `EGIM Observatory`.",
+        "operationId" : "observatoriesObservatoryInstrumentsInstrumentParametersGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "observatory",
+          "in" : "path",
+          "description" : "EGIM observatory name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "instrument",
+          "in" : "path",
+          "description" : "EGIM instrument name.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "List of parameters for a specific EGIM Instrument of an EGIM Observatory.",
+            "schema" : {
+              "$ref" : "#/definitions/Parameters"
+            }
+          }
+        }
+      }
+    },
+    "/observatories/{observatory}/instruments/{instrument}/parameters/{parameter}" : {
+      "get" : {
+        "tags" : [ "parameter" ],
+        "summary" : "Time-series of a specific EGIM parameter.",
+        "description" : "Gets the time-series of a specific `EGIM parameter` in a certain time range for an `EGIM instrument` of an `EGIM observatory`.",
+        "operationId" : "observatoriesObservatoryInstrumentsInstrumentParametersParameterGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "observatory",
+          "in" : "path",
+          "description" : "EGIM observatory name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "instrument",
+          "in" : "path",
+          "description" : "EGIM instrument name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "parameter",
+          "in" : "path",
+          "description" : "EGIM parameter name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "startDate",
+          "in" : "query",
+          "description" : "The start time for the query. This may be an absolute or relative time. The **Absolute time** follows the Unix (or POSIX) style timestamp. The **Relative time** follows the format `<amount><time unit>-ago` where `<amount>` is the number of time units and `<time unit>` is the unit of time *(ms->milliseconds, s->seconds, h->hours, d->days, w->weeks, n->months, y->years)*. For example, if we provide a start time of `1h-ago` and leave out the end time, our query will return data start at 1 hour ago to the current time.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "endDate",
+          "in" : "query",
+          "description" : "The end time for the query in Unix (or POSIX) style. If the end time is not supplied, the *current time* will be used.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Time-series of a specific EGIM parameter.",
+            "schema" : {
+              "$ref" : "#/definitions/Observations"
+            }
+          }
+        }
+      }
+    },
+    "/observatories/{observatory}/instruments/{instrument}/parameters/{parameter}/stats" : {
+      "get" : {
+        "tags" : [ "parameter" ],
+        "summary" : "Statistics of time-series of a specific parameter.",
+        "description" : "Gets the statistics (average, maximum and minimum value) of time-series of a specific `EGIM parameter` in a certain time range for an `EGIM instrument` of an observatory.",
+        "operationId" : "observatoriesObservatoryInstrumentsInstrumentParametersParameterStatsGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "observatory",
+          "in" : "path",
+          "description" : "The observatory name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "instrument",
+          "in" : "path",
+          "description" : "The instrument name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "parameter",
+          "in" : "path",
+          "description" : "The parameter name.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "startDate",
+          "in" : "query",
+          "description" : "The start time for the query. This may be an absolute or relative time. The **Absolute time** follows the Unix (or POSIX) style timestamp. The **Relative time** follows the format `<amount><time unit>-ago` where `<amount>` is the number of time units and `<time unit>` is the unit of time *(ms->milliseconds, s->seconds, h->hours, d->days, w->weeks, n->months, y->years)*. For example, if we provide a start time of `1h-ago` and leave out the end time, the query will return data start at 1 hour ago to the current time.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "endDate",
+          "in" : "query",
+          "description" : "The end time for the query in Unix (or POSIX) style. If the end time is not supplied, the *current time* will be used.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Time-series of a specific parameter.",
+            "schema" : {
+              "$ref" : "#/definitions/ObservationsStats"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Instrument" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Name of an Instrument"
+        }
+      },
+      "description" : "Definition of an Instrument"
+    },
+    "Instruments" : {
+      "type" : "object",
+      "properties" : {
+        "instruments" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Instrument"
+          }
+        }
+      },
+      "description" : "Array of instruments"
+    },
+    "Observation" : {
+      "type" : "object",
+      "properties" : {
+        "phenomenonTime" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "UnixTime in seconds"
+        },
+        "value" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "observation value"
+        }
+      },
+      "description" : "Definition of an Observation"
+    },
+    "Observations" : {
+      "type" : "object",
+      "properties" : {
+        "observatory" : {
+          "$ref" : "#/definitions/Observatory"
+        },
+        "instrument" : {
+          "$ref" : "#/definitions/Instrument"
+        },
+        "parameter" : {
+          "$ref" : "#/definitions/Parameter"
+        },
+        "observations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Observation"
+          }
+        }
+      },
+      "description" : "Array of Observations"
+    },
+    "ObservationsStats" : {
+      "type" : "object",
+      "properties" : {
+        "node" : {
+          "$ref" : "#/definitions/Observatory"
+        },
+        "instrument" : {
+          "$ref" : "#/definitions/Instrument"
+        },
+        "parameter" : {
+          "$ref" : "#/definitions/Parameter"
+        },
+        "stats" : {
+          "$ref" : "#/definitions/ObservationsStatsStats"
+        }
+      },
+      "description" : "Obesrvations statistics"
+    },
+    "ObservationsStatsStats" : {
+      "type" : "object",
+      "properties" : {
+        "avg" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "average value"
+        },
+        "min" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "minimum value"
+        },
+        "max" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "maximum value"
+        }
+      }
+    },
+    "Observatory" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Name of the observatory"
+        }
+      },
+      "description" : "Definition of an Observatory"
+    },
+    "Parameter" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Name of a Parameter"
+        }
+      },
+      "description" : "Definition of a Parameter"
+    },
+    "Parameters" : {
+      "type" : "object",
+      "properties" : {
+        "parameters" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Parameter"
+          }
+        }
+      },
+      "description" : "Array of Parameters"
+    }
+  }
+}
